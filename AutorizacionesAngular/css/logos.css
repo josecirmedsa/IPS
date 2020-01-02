@@ -1,0 +1,54 @@
+﻿/*//////////////////////////*/
+/*https://css.spritegen.com*/
+/*//////////////////////////*/
+
+.aca, .boreal, .medife, .red, .sancor,
+.luzyfuerza, .swiss {
+    display: inline-block;
+    background: url('/images/logos.png') no-repeat;
+    overflow: hidden;
+    text-indent: -9999px;
+    text-align: left;
+}
+
+.aca {
+    background-position: -0px -0px;
+    width: 100px;
+    height: 75px;
+}
+
+.boreal {
+    background-position: -100px -0px;
+    width: 100px;
+    height: 75px;
+}
+
+.medife {
+    background-position: -0px -75px;
+    width: 100px;
+    height: 75px;
+}
+
+.red {
+    background-position: -100px -75px;
+    width: 100px;
+    height: 75px;
+}
+
+.sancor {
+    background-position: -0px -150px;
+    width: 100px;
+    height: 75px;
+}
+
+.luzyfuerza {
+    background-position: -100px -150px;
+    width: 100px;
+    height: 75px;
+}
+
+.swiss {
+    background-position: -0px -225px;
+    width: 100px;
+    height: 75px;
+}

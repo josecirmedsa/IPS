@@ -1,0 +1,256 @@
+﻿<div>
+    <div style="margin-top:10px">
+
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Prestador - Facturador
+            </div>
+            <div class="card-body">
+                <div class="panel-body row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <label for="prestador">{{msjPrestador}}</label>
+                        <select id="prestador" class="form-control" [(ngModel)]="prestador" (change)="presChange()">
+                            <option *ngFor="let order of prestadores; let i = index" [ngValue]="prestadores[i].id"> {{prestadores[i].name}} </option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12" [hidden]="prestadores.length < 2">
+                        <label for="Facturador">Facturador</label>
+                        <select id="Facturador" class="form-control" [(ngModel)]="facturador">
+                            <option *ngFor="let order of facturadores; let i = index" [ngValue]="facturadores[i].id"> {{facturadores[i].name}} </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header bg-primary text-white">Afiliado</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <label for="OS">Obra Social</label>
+                        <select id="OS" name="OS" class="form-control" (focus)="osFocus()" (change)="osChange()" [(ngModel)]="obrasocial">
+                            <option *ngFor="let order of OSXIdPre; let i = index" [value]="OSXIdPre[i].id"> {{OSXIdPre[i].name}} </option>
+                        </select>
+                    </div>
+                    <!--<div class="form-group col-md-3 col-sm-12 col-xs-12">
+        <label for="Afiliado" style="display: block;"><i>{{carnetMask}}</i></label>
+        <input id="Afiliado" type="text" name="Afiliado" class="form-control" style="width: 80%;display: inline-flex;" [(ngModel)]="credencial" (keydown.Tab)="getElegibilidad()" [readonly]="obrasocial==undefined" placeholder="{{carnetMask}}" />
+
+    </div>-->
+                    <div class="form-group col-md-2 col-sm-12 col-xs-12" style="padding-right:0"  *ngIf="obrasocial!=undefined">
+                        <label for="Carnet" style="display: block;"><i>Carnet</i> <a data-toggle="tooltip" data-placement="right" title="{{carnetMask}}">  (?)</a></label>
+
+                        <div class="ng-autocomplete form-group" id="Carnet" style="width: 100%;">
+
+                            <ng-autocomplete [data]="dataCarnet"
+                                             [searchKeyword]="keywordCarnet"
+                                             (selected)='selectEventCarnet($event)'
+                                           
+                                   
+                                             [itemTemplate]="itemTemplateCarnet"
+                                             [(ngModel)]="autoCarnet"
+                                             (keydown)="getPrestacionesCarnet()"
+                                            
+                                             >
+                            </ng-autocomplete>
+
+                            <ng-template #itemTemplateCarnet let-item>
+                                <a [innerHTML]="item.descripcion"></a>
+                            </ng-template>
+                           
+                        </div>
+
+                    </div>
+                    <div class="col-md-1" style="padding-left:0" *ngIf="obrasocial!=undefined">
+                        <div class="form-group">
+                            <label for="AfiliadoNombre">&nbsp;</label>
+                            <a class="input-group-text" id="buscarAfil" style="height:40px;width:40px; background-color: #007bff;" (click)="getElegibilidad()"><i class="fa fa-search" style="color: white;"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12" style="padding-left:0" *ngIf="obrasocial!=undefined">
+                        <div class="form-group">
+                            <label for="AfiliadoNombre">Afiliado Nombre</label>
+                            <input id="AfiliadoNombre" name="AfiliadoNombre" class="form-control" readonly [(ngModel)]="AfilNm" [ngClass]="{'blackText': ckeckInexistente(), 'redText': !ckeckInexistente()}" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-12 col-xs-12 hidden-xs">
+                        <i [ngClass]="logo" style="height: 75px"></i>
+                    </div>
+                </div>
+                </div>
+        </div>
+        <div class="card" *ngIf="ckeckInexistente()">
+            <div class="card-header bg-primary  text-white">Prestaciones</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group col-2">
+                        <label for="Codigo">Codigo</label>
+                        <input id="Codigo" name="Codigo" class="form-control" [(ngModel)]="codigo" (focusout)="codigoFocusOut(focuscant, focuscod)" #focuscod [ngClass]="{'blackText': ckeckDescripcion(), 'redText': !ckeckDescripcion()}" /> <!--(keydown)="codigoKeyPress()"-->
+                    </div>
+                    <div class="form-group col-8">
+                        <label for="Descripcion">Descripcion</label>
+                        <div class="ng-autocomplete form-group" id="Descripcion" style="width: 100%;">
+                            <ng-autocomplete [data]="data"
+                                             [searchKeyword]="keyword"
+                                             (selected)='selectEvent($event, focuscod, focuscant)'
+                                             (inputChanged)='onChangeSearch()'
+                                             (inputFocused)='onFocused()'
+                                             [itemTemplate]="itemTemplate"
+                                             [notFoundTemplate]="notFoundTemplate"
+                                             [(ngModel)]="desc"
+                                             (keydown)="getPrestaciones()"
+                                             
+                                            >
+                            </ng-autocomplete>
+
+                            <ng-template #itemTemplate let-item>
+                                <a [innerHTML]="item.descripcion"   (selected)="itemclick($event, item.cod, focuscant)"></a>
+                            </ng-template>
+                        </div>
+                    </div>
+                    <div class="form-group col-1">
+                        <label for="Cantidad">Cantidad</label>
+                        <input id="Cantidad" type="number" step="1" name="Cantidad" class="form-control" min="1" value="1" [(ngModel)]="cantidad" #focuscant />
+                    </div>
+                    <div class="form-group col-1">
+                        <label for="Add"> &nbsp; </label>
+                        <button  class="form-control" (click)="prestacionAddClick()"  *ngIf="ckeckDescripcion()" style="background-color: #007bff;color: white;">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-12"></div>
+                <div class="clearfix"></div>
+                <div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr style="background-color: #008CBA;width: 99%;color: white; ">
+                                <th  scope="col">Codigo</th>
+                                <th  scope="col">Descripcion</th>
+                                <th  scope="col" style="text-align:center" >Cantidad</th>
+                                <th  scope="col" style="text-align:center" >Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of prestaciones">
+                                <td>{{item.codPres}}</td>
+                                <td>{{item.descripcion}}</td>
+                                <td style="text-align:center"> {{item.cant}}</td>
+                                <td style="text-align:center"><a (click)="deleteItem(item.codPres)">{{item.action}}</a> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <hr/>
+                <div style="text-align: right; width: 99%;">
+                    <div>
+                        <a class="form-control btn btn-danger" style="width: 100px;color:white;margin-right: 10px;" ng-show="vm.Prestacion.List.length > 0 && vm.afiliadoError == ''">Cancelar</a>
+                        <a class="form-control btn btn-primary" style="width: 100px;color:white" *ngIf="showAutorizar()" (click)="autorizarClick()" >Autorizar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #content let-d="dismiss">
+    <!--let-modal-->
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Autorización Online</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <!--<button type="button" class="close" aria-label="Close" (click)="dismiss('Cross click')">-->
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body container">
+        <form>
+            <div class="row">
+                <div class="col col-md-2 col-sm-3 col-xs-3" style="padding-left: 2%;">
+                    <img src="images/logo.png" alt="" style="width:100px" class="logoCenter">
+                </div>
+                <div class="col col-md-10 col-sm-9 col-xs-3 cirmedsa" id="headerName" style="text-align: center;">
+                    <h3>Circulo Medico Salta</h3>
+                    <h6>Asoc. civil sin fines de Lucro</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="padding-bottom: 10px;text-align: center;height:35px">
+                    <h4>titulo</h4>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-4 col-xs-12" style="text-align:center"><b>Autorización Nº:</b> <i>{{authResponse.authNr}}</i></div>
+                <div class="col-md-4 col-xs-12"><b>Fecha:</b> fecha</div>
+                <div class="col-md-4 col-xs-12"><b>Estado:</b> <span ng-class="claseEstado" style="font-size:1.5em"> {{authResponse.estado}}</span></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-xs-12"><b>Afiliado:</b> {{authResponse.afiliado}}</div>
+                <div class="col-md-3 col-xs-12"><b>Plan:</b> {{authResponse.plan}}</div>
+                <div class="col-md-3 col-xs-12"><b>Cond. IVA:</b> {{authResponse.iva}}</div>
+                <div class="col-md-6 col-xs-12"><b>Nº Identificacion:</b> {{authResponse.identificacionNro}}</div>
+                <div class="col-md-6 col-xs-12"><b>Aseguradora:</b> {{authResponse.aseguradora}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-9 col-xs-12"><b>Profesional:</b> {{authResponse.profesional}}</div>
+                <div class="col-md-3 col-xs-12"><b>Matricula:</b> {{authResponse.matricula}}</div>
+            </div>
+            <div class="row">
+                <div style="margin-bottom: 5px;margin-top: 5px;">
+                    <div class="col-md-12 col-xs-12" style="text-align:center;margin-bottom: 10px;"><b>Prestaciones</b></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-xs-7">Prestación</div>
+                <div class="col-md-1 col-xs-2">Cant.</div>
+                <div class="col-md-2 col-xs-3">Estado</div>
+                <div class="col-md-4 hidden-xs">Observación</div>
+            </div>
+            <div ng-repeat="det in detalle">
+                <hr />
+                <div class="row">
+                    <div class="col-md-5 col-xs-7"> det.prestacion </div>
+                    <div class="col-md-1 col-xs-2"> det.cantidad </div>
+                    <div class="col-md-2 col-xs-3"> det.estado </div>
+                    <div class="col-md-4 hidden-xs"> det.observacion </div>
+                </div>
+
+            </div>
+  
+
+
+                <!--<div class="form-group">
+            <label for="dateOfBirth">Date of birth {{cantidad}}</label>
+            <div class="input-group">
+                <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div>-->
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="d('Save click')">Save</button>
+    </div>
+</ng-template>
+
+
+<ng-template #message let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title" id="modal-basic-title">Info!</h5>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <div class="form-group">
+                <label>{{alerta}}</label>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" id="autorizacion" (click)="open(content)">Launch demo modal</button>
+<button class="btn btn-lg btn-outline-primary" id="message" hidden (click)="open(message)">Alert</button>

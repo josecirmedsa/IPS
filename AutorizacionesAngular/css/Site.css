@@ -1,0 +1,110 @@
+﻿
+.nav-link{
+    color:white!important;
+}
+
+.active {
+    background-color: lightblue;
+}
+
+.card{
+    margin-bottom:1%;
+}
+
+.card-header {
+    padding: .5rem 1.25rem;
+}
+
+.card-body {
+    padding: 0.80rem;
+    font-size: 0.85em;
+}
+.jumbotron {
+    padding: 2rem;
+}
+
+.autocomplete-container .input-container input {
+    font-size: 14px;
+    border: none;
+    outline: 0;
+    background-color: #fff;
+    width: 100%;
+}
+
+.redText {
+    color: red;
+}
+.blackText {
+    color: black;
+}
+
+.modal-content {
+    margin-top: 35%;
+}
+
+.modal-header {
+    background-color: darkblue;
+    color: white;
+}
+.close {
+    color: white;
+}
+#Descripcion > ng-autocomplete > div > div.input-container > input,
+#Carnet > ng-autocomplete > div > div.input-container > input {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 75%;
+        margin: 1.75rem auto;
+    }
+
+}
+.modal {
+    top: -30%;
+}
+
+.form-group.hidden {
+    width: 0;
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+
+    .custom-day.focused {
+        background-color: #e6e6e6;
+    }
+
+    .custom-day.range, .custom-day:hover {
+        background-color: rgb(2, 117, 216);
+        color: white;
+    }
+
+    .custom-day.faded {
+        background-color: rgba(2, 117, 216, 0.5);
+    }
+

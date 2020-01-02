@@ -1,0 +1,34 @@
+﻿<!--<p style="text-align: right;position: relative;top: 57px;z-index: 100;padding-right:2%;color: white;"> {{currentUser.username}}</p>-->
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #069;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#"  *ngIf="checkUser()"  >Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="#" routerLink="autorizacion" *ngIf="checkUser()"  >Autorizacion</a>
+            <a class="nav-item nav-link" href="#" routerLink="autorizaciones" *ngIf="checkUser()"  >Autorizaciones</a>
+            <a class="nav-item nav-link" href="#" [routerLink]="['/login']" *ngIf="checkUser()" >Salir</a>
+        </div>
+    </div>
+</nav>
+<!-- main app container -->
+<div class="jumbotron">
+    <div class="container-fluid">
+        <div class="row">
+            <div  class="col-12">
+                <alert></alert>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- credits -->
+<div class="text-center">
+    <!--<p>
+        <a href="http://jasonwatmore.com/post/2018/05/16/angular-6-user-registration-and-login-example-tutorial" target="_top">Angular 6 User Registration and Login Example & Tutorial</a>
+    </p>
+    <p>
+        <a href="http://jasonwatmore.com" target="_top">JasonWatmore.com</a>
+    </p>-->
+</div>

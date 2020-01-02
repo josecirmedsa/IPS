@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-16"?><SOLICITUD><EMISOR><ID>00001-22222</ID><PROT>CA_V20</PROT><MSGID>201909050</MSGID><TER /><APP>HMS_CAWEB</APP><TIME>5/9/2019 9:27:38 a. m.</TIME></EMISOR><SEGURIDAD><TIPOAUT>U</TIPOAUT><USRID>7040521</USRID><USRPASS>DAT_MGR</USRPASS></SEGURIDAD><OPER><TIPO>ELG</TIPO><FECHA>2019-09-05</FECHA><IDASEG>ACA_SALUD</IDASEG><IDPRESTADOR>7040521</IDPRESTADOR></OPER><PID><ID>128990/27</ID></PID></SOLICITUD>
+
+
+<?xml version='1.0' encoding='UTF-8'?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<SOAP-ENV:Body>
+<ns1:transaccionStrResponse xmlns:ns1="http://caws/Servicios.wsdl" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<return xsi:type="xsd:string"><RESPUESTA>
+  <IDTRAN>22540784</IDTRAN>
+  <OPER>ELG</OPER>
+  <FECHAOPER>2019-09-05</FECHAOPER>
+  <STATUS>OK</STATUS>
+  <RSPCODG>MSGXML_1000</RSPCODG>
+  <RSPMSGG>AFILIACION  VALIDA</RSPMSGG>
+  <AFICODIGO>128990/27</AFICODIGO>
+  <AFIPLAN>AS204</AFIPLAN>
+  <AFIPLANADIC>INTEGRAL AS204</AFIPLANADIC>
+  <AFIAPE>SCHNEIDER</AFIAPE>
+  <AFINOM>MARIA CELESTE</AFINOM>
+  <AFISEXO>F</AFISEXO>
+  <AFINAC>1986-05-23</AFINAC>
+  <AFIAFIL>NO GRAVADO</AFIAFIL>
+  <AFIDNI>-32165993</AFIDNI>
+</RESPUESTA>
+</return>
+</ns1:transaccionStrResponse>
+
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+

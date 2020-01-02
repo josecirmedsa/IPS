@@ -1,0 +1,33 @@
+﻿<!--<h1>Hi {{currentUser.username}}!</h1>-->
+<p>You're logged in with Angular 6!!</p>
+<h3>All registered users:</h3>
+<ul>
+    <li *ngFor="let user of users">
+        {{user.id}} - ({{user.name}}
+        - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
+    </li>
+</ul>
+<p><a [routerLink]="['/login']">Logout</a></p>
+
+<div class="ng-autocomplete">
+    <ng-autocomplete [data]="data"
+                     [searchKeyword]="keyword"
+                     (selected)='selectEvent($event)'
+                     (inputChanged)='onChangeSearch()'
+                     (inputFocused)='onFocused()'
+                     [itemTemplate]="itemTemplate"
+                     [notFoundTemplate]="notFoundTemplate"
+                     [(ngModel)]="desc"
+                     (keydown)="getPrestadores()"
+                    
+                     >
+    </ng-autocomplete>
+
+    <ng-template #itemTemplate let-item>
+        <a [innerHTML]="item.descripcion" (selected)="itemclick($event)"></a>
+    </ng-template>
+
+    <ng-template #notFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+    </ng-template>
+</div>
